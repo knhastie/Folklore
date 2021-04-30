@@ -226,8 +226,8 @@ int main()
 			}
 		}
 
-		//determine probability of transmission of story from fifteen future inviduals (x=0)
-		for (int xT = 1; xT < 16; xT++)
+		//determine probability of transmission of story from five future inviduals (x=0)
+		for (int xT = 1; xT < 6; xT++)
 		{
 			//determine if teller has any motifs to transmit
 			bool Has = false;
@@ -242,11 +242,11 @@ int main()
 				//set to base probability of transmission
 				double P = Pbase;
 				//distance-based probability change
-				double Pchange = P * (xT / 30);
+				double Pchange = P * (xT / 10);
 				P = Pbase - Pchange;
 				//new Pchange with all other factors
 				//linguistic and class differences next
-				Pchange = 0 - P * (abs(matT[xT][t].Class - matT[0][t].Class) / 10 + abs(matT[xT][t].Language - matT[0][t].Language) / 10);
+				Pchange = 0 - P * (abs(matT[xT][t].Class - matT[0][t].Class)/10 + abs(matT[xT][t].Language - matT[0][t].Language)/10);
 				//add teller influence and listener impressionabilty
 				Pchange = Pchange + (Pbase * matT[xT][t].Influence) + (Pbase * matT[0][t].Influencable);
 				//only factor left is success values of each motif
@@ -270,10 +270,10 @@ int main()
 		}
 		for (int xL = 1; xL < 100; xL++)
 		{
-			if (xL < 15)
+			if (xL < 5)
 			{
 				//just compare individuals from x=0 to x=xL+5
-				for (int xT = 0; xT < xL + 15; xT++)
+				for (int xT = 0; xT < xL + 5; xT++)
 					//same entire process as for x=0, but using xL instead of zero.
 				{
 					//determine if teller has any motifs to transmit
@@ -290,11 +290,11 @@ int main()
 						//set to base probability of transmission
 						double P = Pbase;
 						//distance-based probability change
-						double Pchange = P * (xT / 30);
+						double Pchange = P * (xT / 10);
 						P = Pbase - Pchange;
 						//new Pchange with all other factors
 						//linguistic and class differences next
-						Pchange = 0 - P * (abs(matT[xT][t].Class - matT[xL][t].Class) / 10 + abs(matT[xT][t].Language - matT[xL][t].Language) / 10);
+						Pchange = 0 - P * (abs(matT[xT][t].Class - matT[xL][t].Class)/10 + abs(matT[xT][t].Language - matT[xL][t].Language)/10);
 						//add teller influence and listener impressionabilty
 						Pchange = Pchange + (Pbase * matT[xT][t].Influence) + (Pbase * matT[xL][t].Influencable);
 						//only factor left is success values of each motif
@@ -317,9 +317,9 @@ int main()
 					}
 				}
 			}
-			else if (xL < 85)
+			else if (xL < 95)
 			{
-				for (int xT = (xL - 15); xT < (xL + 15); xT++)
+				for (int xT = (xL - 5); xT < (xL + 5); xT++)
 					//same process
 				{
 					//determine if teller has any motifs to transmit
@@ -336,11 +336,11 @@ int main()
 						//set to base probability of transmission
 						double P = Pbase;
 						//distance-based probability change
-						double Pchange = P * (abs(xT - xL) / 30);
+						double Pchange = P * (abs(xT-xL) / 5);
 						P = Pbase - Pchange;
 						//new Pchange with all other factors
 						//linguistic and class differences next
-						Pchange = 0 - Pbase * (abs(matT[xT][t].Class - matT[xL][t].Class) / 10 + abs(matT[xT][t].Language - matT[xL][t].Language) / 10);
+						Pchange = 0 - Pbase * (abs(matT[xT][t].Class - matT[xL][t].Class)/10 + abs(matT[xT][t].Language - matT[xL][t].Language)/10);
 						//add teller influence and listener impressionabilty
 						Pchange = Pchange + (Pbase * matT[xT][t].Influence) + (Pbase * matT[xL][t].Influencable);
 						//only factor left is success values of each motif
@@ -365,7 +365,7 @@ int main()
 			}
 			else
 			{
-				for (int xT = xL - 15; xT < 100; xT++)
+				for (int xT = xL - 5; xT < 100; xT++)
 					//same process
 				{
 					//determine if teller has any motifs to transmit
@@ -382,11 +382,11 @@ int main()
 						//set to base probability of transmission
 						double P = Pbase;
 						//distance-based probability change
-						double Pchange = P * (abs(xT - xL) / 30);
+						double Pchange = P * (abs(xT-xL)/5);
 						P = Pbase - Pchange;
 						//new Pchange with all other factors
 						//linguistic and class differences next
-						Pchange = 0 - Pbase * (abs(matT[xT][t].Class - matT[xL][t].Class) / 10 + abs(matT[xT][t].Language - matT[xL][t].Language) / 10);
+						Pchange = 0 - Pbase * (abs(matT[xT][t].Class - matT[xL][t].Class)/10 + abs(matT[xT][t].Language - matT[xL][t].Language)/10);
 						//add teller influence and listener impressionabilty
 						Pchange = Pchange + (Pbase * matT[xT][t].Influence) + (Pbase * matT[xL][t].Influencable);
 						//only factor left is success values of each motif
